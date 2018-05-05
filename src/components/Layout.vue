@@ -1,0 +1,402 @@
+<template>
+  <div id="layout" :class="{'sidebar-collapse':isCollapse}">
+    <el-container>
+      <el-header style="height:50px; line-height:50px;">
+        <a href="../../index2.html" class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini"><b>C</b>MS</span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg"><b>Omg</b>Cms</span>
+        </a>
+        <nav class="navbar navbar-static-top">
+          <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button" @click="collapse">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+          </a>
+          <div class="rigth-btns">
+            <el-dropdown size="medium" trigger="click">
+              <div class="pull-left image">
+                <img src="../assets/images/trump.jpg" class="img-circle" alt="User Image" style="margin-right:5px;">
+                <span class="el-dropdown-link">
+                  系统管理员
+                </span>
+              </div>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item disabled>个人中心</el-dropdown-item>
+                <el-dropdown-item disabled>设置</el-dropdown-item>
+                <el-dropdown-item divided>退出登录</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
+        </nav>
+        
+      </el-header>
+      <el-container>
+        <el-aside>
+          <div class="user-panel">
+            <div class="pull-left image">
+              <img src="../assets/images/trump.jpg" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+              <p>系统管理员</p>
+              <a href="#" style="font-size: 12px; color: #444;"><i class="fa fa-circle text-success"></i> 在线</a>
+            </div>
+          </div>
+          <div class="nav">
+            <div class="header">主菜单</div>
+            <!-- 菜单 -->
+            <el-menu default-active="1" class="el-menu-vertical-demo" :collapse="isCollapse" @open="handleOpen" @close="handleClose">
+              
+              <el-menu-item index="1">
+                <i class="fa fa-home" aria-hidden="true"></i>
+                <span slot="title">主页</span>
+              </el-menu-item>
+              <!-- <el-menu-item index="2">
+              <i class="el-icon-menu"></i>
+              <span slot="title">导航二</span>
+              </el-menu-item>
+              <el-menu-item index="3" disabled>
+              <i class="el-icon-document"></i>
+              <span slot="title">导航三</span>
+              </el-menu-item>
+              <el-menu-item index="4">
+              <i class="el-icon-setting"></i>
+              <span slot="title">导航四</span>
+              </el-menu-item> -->
+              <el-submenu index="5">
+                <template slot="title">
+                  <i class="fa fa-book" aria-hidden="true"></i>
+                  <span slot="title">内容管理</span>
+                </template>
+                <el-menu-item-group>
+                  <span slot="title">分组一</span>
+                  <el-menu-item index="5-1">选项1</el-menu-item>
+                  <el-menu-item index="5-2">选项2</el-menu-item>
+                </el-menu-item-group>
+              </el-submenu>
+          </el-menu>
+          </div>
+
+        </el-aside>
+        <el-container>
+          <el-main>Main</el-main>
+          <el-footer style="height:50px;">Footer</el-footer>
+        </el-container>
+      </el-container>
+    </el-container>
+  
+  </div>
+</template>
+
+<script>
+export default {
+  name: "layout",
+
+  created: () => {},
+
+  data: () => {
+    return {
+      isCollapse: false
+    };
+  },
+
+  methods: {
+    collapse() {
+      this.isCollapse = !this.isCollapse;
+      console.log(this.isCollapse);
+      return false;
+    },
+    handleOpen() {
+      console.log("打开");
+    },
+    handleClose() {
+      console.log("关闭");
+    }
+  }
+};
+</script>
+
+<style>
+.sidebar-collapse .el-header .logo-mini {
+  display: inline;
+}
+
+.sidebar-collapse .el-header .logo-lg {
+  display: none;
+}
+.sidebar-collapse .el-header .logo {
+  width: 50px;
+  padding: 0 5px;
+}
+
+.sidebar-collapse .el-header .navbar {
+  margin-left: 50px;
+}
+
+.sidebar-collapse .el-aside {
+  width: 50px !important;
+}
+
+.sidebar-collapse .el-aside .header {
+  display: none !important;
+}
+
+.sidebar-collapse .el-submenu ul,
+.sidebar-collapse .el-submenu > div > .el-submenu__icon-arrow,
+.sidebar-collapse .el-submenu > div > span,
+.sidebar-collapse .el-menu-item > span {
+  display: none !important;
+}
+
+.sidebar-collapse .el-submenu,
+.sidebar-collapse .el-menu-item {
+  padding: 0 15px !important;
+}
+
+.sidebar-collapse .el-submenu > div,
+.sidebar-collapse .el-menu-item > div {
+  padding: 0 15px !important;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+.sidebar-collapse .el-submenu > div {
+  padding: 0px 0px !important;
+}
+
+.sidebar-collapse .el-menu--collapse {
+  width: 50px !important;
+}
+
+.el-header .logo-mini {
+  display: none;
+}
+
+.el-header .rigth-btns {
+  float: right;
+}
+
+.el-header .rigth-btns .el-dropdown {
+  color: #fff;
+  cursor: pointer;
+  padding: 0 5px;
+  margin-right: 15px;
+}
+
+.el-header .rigth-btns .el-dropdown:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: #f6f6f6;
+}
+
+.el-aside .el-menu {
+  border-right: 0px;
+  background-color: transparent;
+}
+.el-aside .nav .fa {
+  font-size: 18px;
+}
+
+.el-menu-item,
+.el-submenu__title {
+  height: 40px;
+  line-height: 40px;
+}
+
+.el-menu-item.is-active {
+  color: #1890ff;
+}
+
+.el-aside .header {
+  color: #848484;
+  background: #f9fafc;
+  -webkit-transition: border-left-color 0.3s ease;
+  -o-transition: border-left-color 0.3s ease;
+  transition: border-left-color 0.3s ease;
+  overflow: hidden;
+  text-overflow: clip;
+  padding: 10px 25px 10px 15px;
+}
+
+.el-aside .user-panel {
+  position: relative;
+  width: 100%;
+  padding: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.el-aside .user-panel .pull-left {
+  float: left !important;
+}
+
+.user-panel > .image > img {
+  width: 100%;
+  max-width: 45px;
+  height: auto;
+  display: inline-block;
+}
+
+.el-header .navbar .image > img {
+  width: 100%;
+  max-width: 25px;
+  height: auto;
+  display: inline-block;
+}
+
+.img-circle {
+  border-radius: 50%;
+}
+
+.user-panel > .info {
+  padding: 5px 5px 5px 15px;
+  line-height: 1;
+  position: absolute;
+  left: 55px;
+  color: #444;
+}
+
+.user-panel > .info > p {
+  font-weight: 600;
+  margin-bottom: 9px;
+  margin: 0 0 10px;
+}
+
+.user-panel .text-success {
+  color: #3c763d;
+}
+
+.user-panel .fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.el-header,
+.el-footer {
+  background-color: #b3c0d1;
+  color: #333;
+  text-align: center;
+  line-height: 60px;
+  z-index: 820;
+  padding: 0 0;
+}
+
+.el-header {
+  background-color: #3c8dbc;
+}
+
+.el-aside {
+  width: 230px !important;
+  color: #333;
+  border-right: 1px solid #d2d6de;
+  background-color: #f9fafc;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-top: 50px;
+  min-height: 100%;
+  width: 230px;
+  z-index: 810;
+  -webkit-transition: -webkit-transform 0.3s ease-in-out, width 0.3s ease-in-out;
+  -moz-transition: -moz-transform 0.3s ease-in-out, width 0.3s ease-in-out;
+  -o-transition: -o-transform 0.3s ease-in-out, width 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+}
+
+.el-main {
+  background-color: #e9eef3;
+  color: #333;
+  text-align: center;
+  line-height: 160px;
+  margin-left: 230px;
+}
+
+body > .el-container {
+  margin-bottom: 40px;
+}
+
+.el-container:nth-child(5) .el-aside,
+.el-container:nth-child(6) .el-aside {
+  line-height: 260px;
+}
+
+.el-container:nth-child(7) .el-aside {
+  line-height: 320px;
+}
+
+.theme-blue .el-header a.logo {
+  background-color: #3c8dbc;
+  color: #fff;
+  border-bottom: 0 solid transparent;
+}
+
+.el-header a.logo {
+  transition: width 0.3s ease-in-out;
+  display: block;
+  float: left;
+  height: 50px;
+  font-size: 20px;
+  line-height: 50px;
+  text-align: center;
+  width: 230px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 0 15px;
+  font-weight: 300;
+  overflow: hidden;
+}
+
+.el-header .navbar {
+  -webkit-transition: margin-left 0.3s ease-in-out;
+  -o-transition: margin-left 0.3s ease-in-out;
+  transition: margin-left 0.3s ease-in-out;
+  margin-bottom: 0;
+  margin-left: 230px;
+  border: none;
+  min-height: 50px;
+  border-radius: 0;
+}
+
+.theme-blue .el-header .logo:hover {
+  background-color: #3b8ab8;
+}
+
+.theme-blue .el-header .sidebar-toggle:hover {
+  background-color: #367fa9;
+}
+.theme-blue .el-header .sidebar-toggle:hover {
+  color: #f6f6f6;
+  background: rgba(0, 0, 0, 0.1);
+}
+.theme-blue .el-header .sidebar-toggle {
+  color: #fff;
+}
+
+.el-header .sidebar-toggle {
+  float: left;
+  background-color: transparent;
+  background-image: none;
+  padding: 0px 15px;
+  font-family: fontAwesome;
+}
+
+.theme-blue .el-footer {
+  border-top-color: #d2d6de;
+}
+.el-footer {
+  display: none;
+  background: #fff;
+  padding: 15px;
+  color: #444;
+  border-top: 1px solid #d2d6de;
+
+  -webkit-transition: -webkit-transform 0.3s ease-in-out,
+    margin 0.3s ease-in-out;
+  -moz-transition: -moz-transform 0.3s ease-in-out, margin 0.3s ease-in-out;
+  -o-transition: -o-transform 0.3s ease-in-out, margin 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, margin 0.3s ease-in-out;
+  margin-left: 230px;
+  z-index: 820;
+}
+</style>
