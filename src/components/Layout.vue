@@ -44,24 +44,20 @@
           <div class="nav">
             <div class="header">主菜单</div>
             <!-- 菜单 -->
-            <el-menu default-active="1" class="el-menu-vertical-demo" :collapse="isCollapse" @open="handleOpen" @close="handleClose">
+            <el-menu default-active="1" class="el-menu-vertical-demo" :collapse="isCollapse" @select="selectMenu">
               
               <el-menu-item index="1">
                 <i class="fa fa-home" aria-hidden="true"></i>
                 <span slot="title">主页</span>
               </el-menu-item>
-              <!-- <el-menu-item index="2">
-              <i class="el-icon-menu"></i>
-              <span slot="title">导航二</span>
+              <el-menu-item index="2">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <span slot="title">用户管理</span>
               </el-menu-item>
-              <el-menu-item index="3" disabled>
-              <i class="el-icon-document"></i>
-              <span slot="title">导航三</span>
+              <el-menu-item index="3">
+                <i class="fa fa-id-badge" aria-hidden="true"></i>
+                <span slot="title">角色管理</span>
               </el-menu-item>
-              <el-menu-item index="4">
-              <i class="el-icon-setting"></i>
-              <span slot="title">导航四</span>
-              </el-menu-item> -->
               <el-submenu index="5">
                 <template slot="title">
                   <i class="fa fa-book" aria-hidden="true"></i>
@@ -78,7 +74,9 @@
 
         </el-aside>
         <el-container>
-          <el-main>Main</el-main>
+          <el-main>
+            <router-view></router-view>
+          </el-main>
           <el-footer style="height:50px;">Footer</el-footer>
         </el-container>
       </el-container>
@@ -105,11 +103,8 @@ export default {
       console.log(this.isCollapse);
       return false;
     },
-    handleOpen() {
-      console.log("打开");
-    },
-    handleClose() {
-      console.log("关闭");
+    selectMenu(index, indexPath) {
+      console.log(index + " " + indexPath);
     }
   }
 };
@@ -128,8 +123,9 @@ export default {
   padding: 0 5px;
 }
 
+.sidebar-collapse .el-main,
 .sidebar-collapse .el-header .navbar {
-  margin-left: 50px;
+  margin-left: 50px !important;
 }
 
 .sidebar-collapse .el-aside {
@@ -309,8 +305,8 @@ export default {
   background-color: #e9eef3;
   color: #333;
   text-align: center;
-  line-height: 160px;
   margin-left: 230px;
+  min-height: 350px;
 }
 
 body > .el-container {

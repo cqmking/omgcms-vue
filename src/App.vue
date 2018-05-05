@@ -28,9 +28,6 @@ body {
   margin: 0;
   font-size: 14px;
   background-color: #e9eef3;
-}
-
-#app {
   font-family: 'Microsoft YaHei', Helvetica, sans-serif;
 }
 
