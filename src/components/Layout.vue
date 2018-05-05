@@ -1,4 +1,5 @@
 <template>
+import index from 'vue';
   <div id="layout" :class="{'sidebar-collapse':isCollapse}">
     <el-container>
       <el-header style="height:50px; line-height:50px;">
@@ -69,12 +70,19 @@
                   <el-menu-item index="5-2">选项2</el-menu-item>
                 </el-menu-item-group>
               </el-submenu>
-          </el-menu>
+            </el-menu>
           </div>
 
         </el-aside>
         <el-container>
           <el-main>
+            <!-- 面包屑导航 -->
+            <el-breadcrumb separator="/">
+              <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+              <el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>
+              <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+              <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+            </el-breadcrumb>
             <router-view></router-view>
           </el-main>
           <el-footer style="height:50px;">Footer</el-footer>
@@ -93,7 +101,13 @@ export default {
 
   data: () => {
     return {
-      isCollapse: false
+      isCollapse: false,
+      menus:[
+        {
+          name: "主页",
+          index: "1"
+        }
+      ]
     };
   },
 
