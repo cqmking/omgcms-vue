@@ -1,5 +1,5 @@
 <template>
-import index from 'vue';
+
   <div id="layout" :class="{'sidebar-collapse':isCollapse}">
     <el-container>
       <el-header style="height:50px; line-height:50px;">
@@ -44,33 +44,10 @@ import index from 'vue';
           </div>
           <div class="nav">
             <div class="header">主菜单</div>
+
             <!-- 菜单 -->
-            <el-menu default-active="1" class="el-menu-vertical-demo" :collapse="isCollapse" @select="selectMenu">
-              
-              <el-menu-item index="1">
-                <i class="fa fa-home" aria-hidden="true"></i>
-                <span slot="title">主页</span>
-              </el-menu-item>
-              <el-menu-item index="2">
-                <i class="fa fa-user" aria-hidden="true"></i>
-                <span slot="title">用户管理</span>
-              </el-menu-item>
-              <el-menu-item index="3">
-                <i class="fa fa-id-badge" aria-hidden="true"></i>
-                <span slot="title">角色管理</span>
-              </el-menu-item>
-              <el-submenu index="5">
-                <template slot="title">
-                  <i class="fa fa-book" aria-hidden="true"></i>
-                  <span slot="title">内容管理</span>
-                </template>
-                <el-menu-item-group>
-                  <span slot="title">分组一</span>
-                  <el-menu-item index="5-1">选项1</el-menu-item>
-                  <el-menu-item index="5-2">选项2</el-menu-item>
-                </el-menu-item-group>
-              </el-submenu>
-            </el-menu>
+            <Nav :isCollapse="isCollapse"></Nav>
+            
           </div>
 
         </el-aside>
@@ -94,6 +71,8 @@ import index from 'vue';
 </template>
 
 <script>
+import Nav from "./common/Nav";
+
 export default {
   name: "layout",
 
@@ -101,26 +80,17 @@ export default {
 
   data: () => {
     return {
-      isCollapse: false,
-      menus:[
-        {
-          name: "主页",
-          index: "1"
-        }
-      ]
+      isCollapse: false
     };
   },
 
   methods: {
     collapse() {
       this.isCollapse = !this.isCollapse;
-      console.log(this.isCollapse);
       return false;
-    },
-    selectMenu(index, indexPath) {
-      console.log(index + " " + indexPath);
     }
-  }
+  },
+  components: { Nav }
 };
 </script>
 
@@ -135,6 +105,7 @@ export default {
 .sidebar-collapse .el-header .logo {
   width: 50px;
   padding: 0 5px;
+  font-size: 18px;
 }
 
 .sidebar-collapse .el-main,
