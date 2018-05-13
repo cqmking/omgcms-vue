@@ -55,12 +55,17 @@
           <el-main>
             <!-- 面包屑导航 -->
             <el-breadcrumb separator="/">
-              <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+              <template v-for="(item, n) in matchedItems">
+                <el-breadcrumb-item v-if="item.path!='/layout/home'" :to="{ path: item.path }">{{item.meta.label}}</el-breadcrumb-item>
+              </template>
+              <!-- <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
               <el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>
               <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-              <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+              <el-breadcrumb-item>活动详情</el-breadcrumb-item> -->
             </el-breadcrumb>
+
             <router-view></router-view>
+            
           </el-main>
           <el-footer style="height:50px;">Footer</el-footer>
         </el-container>
@@ -77,6 +82,13 @@ export default {
   name: "layout",
 
   created: () => {},
+
+  computed: {
+    matchedItems() {
+      let matchedItems = this.$route.matched;
+      return matchedItems;
+    }
+  },
 
   data: () => {
     return {
