@@ -8,10 +8,8 @@ import 'font-awesome/css/font-awesome.min.css'
 import VueRouter from 'vue-router'
 
 import routes from './routes/routes'
-
-import axios from 'axios'
-
-axios.defaults.withCredentials=true;
+// import axios from 'axios'
+import axios from './http.js'
 
 const router = new VueRouter({
   routes
@@ -19,6 +17,8 @@ const router = new VueRouter({
 
 Vue.use(ElementUI)
 Vue.use(VueRouter)
+
+Vue.prototype.$http = axios;
 
 new Vue({
   router,
