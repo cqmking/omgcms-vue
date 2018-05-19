@@ -56,7 +56,7 @@
             <!-- 面包屑导航 -->
             <el-breadcrumb separator="/">
               <template v-for="(item, n) in matchedItems">
-                <el-breadcrumb-item v-if="item.path!='/layout/home'" :to="{ path: item.path }">{{item.meta.label}}</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ path: item.path }">{{item.meta.label}}</el-breadcrumb-item>
               </template>
             </el-breadcrumb>
 

@@ -11,18 +11,17 @@ import NavItem from "./NavItem";
 export default {
   props: ["isCollapse"],
   data: function() {
-
     // 从路由中得到导航，layout下的子元素作为导航
     let _routes = this.$router.options.routes;
-    let _navRoutes = [];
-    for (let i = 0; i < _routes.length; i++) {
-      if (_routes[i].path == "/layout") {
-        _navRoutes = _routes[i].children;
-      }
-    }
+    // let _navRoutes = [];
+    // for (let i = 0; i < _routes.length; i++) {
+    //   if (_routes[i].path == "/layout") {
+    //     _navRoutes = _routes[i].children;
+    //   }
+    // }
 
     return {
-      navList: _navRoutes
+      navList: _routes
     };
   },
   computed: {
@@ -33,13 +32,23 @@ export default {
   },
   methods: {
     selectMenu(index, indexPath) {
-      let openMenu = this.$refs.navbar.openedMenus.concat([]);
-      openMenu = openMenu.reverse();
-      openMenu.forEach(ele => {
-        this.$refs.navbar.closeMenu(ele);
-      });
+      // let openMenu = this.$refs.navbar.openedMenus.concat([]);
+      // openMenu = openMenu.reverse();
+      // openMenu.forEach(ele => {
+      //   this.$refs.navbar.closeMenu(ele);
+      // });
     }
   },
   components: { NavItem }
 };
 </script>
+
+<style>
+.el-submenu .el-menu-item {
+  height: 40px;
+  line-height: 40px;
+  padding: 0 45px;
+  min-width: 200px;
+}
+</style>
+

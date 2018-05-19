@@ -1,54 +1,84 @@
 import Layout from '../components/Layout.vue'
-import Home from '../components/home/Home.vue'
+
+import SysInfo from '../components/workspace/SysInfo'
+import Dashboard from '../components/workspace/Dashboard'
+
+import ArticleList from '../components/contents/ArticleList'
+
 import UserList from '../components/user/UserList'
 import Login from '../components/views/Login.vue'
 
 let routes = [
     {
         path: '/',
-        redirect: '/login'
+        redirect: '/login',
+        hidden: true
     },
     {
-        path: '/layout',
-        redirect: { name: 'home' },
+        path: '/workspace',
+        redirect: { name: 'dashboard' },
         component: Layout,
-        name: 'layout',
-        meta: {label: '主页'},
+        name: 'workspace',
+        iconClass: "fa-tachometer",
+        meta: { label: '工作台' },
         children: [
-            { path: 'home', component: Home, name: 'home', iconClass: "fa-home", meta: {label: '主页'} },
             {
-                path: "user",
-                name: 'user',
-                component: UserList,
-                iconClass: "fa-user",
-                meta: {label: '用户管理'}
+                path: "/workspace/dashboard",
+                component: Dashboard,
+                name: "dashboard",
+                meta: { label: '管理首页' }
             },
             {
-                path: "role",
-                name: 'role',
-                component: UserList,
-                iconClass: "fa-id-badge",
-                meta: {label: '角色管理'}
+                path: "/workspace/sysinfo",
+                component: SysInfo,
+                name: "sysinfo",
+                meta: { label: '系统信息' }
+            }
+        ]
+    },
+    {
+        path: '/contents',
+        redirect: { name: 'articles' },
+        component: Layout,
+        name: 'contents',
+        iconClass: "fa-book",
+        meta: { label: '内容管理' },
+        children: [
+            {
+                meta: { label: '文章管理' },
+                path: "/contents/articles",
+                component: ArticleList,
+                name: "articles",
             },
             {
-                path: "/content",
-                meta: {label: '内容管理'},
-                iconClass: "fa-book",
-                children: [
-                    {
-                        meta: {label: '模板管理'},
-                        path: "/components"
-                    },
-                    {
-                        meta: {label: '结构管理'},
-                        path: "/components/permission"
-                    },
-                    {
-                        meta: {label: '文章管理'},
-                        path: "/components/permission"
-                    }
-
-                ]
+                meta: { label: '模板管理' },
+                path: "/contents/templates",
+            },
+            {
+                meta: { label: '结构管理' },
+                path: "/contents/structure",
+            }
+        ]
+    },
+    {
+        path: '/system',
+        redirect: { name: 'articles' },
+        component: Layout,
+        name: 'system',
+        iconClass: "fa-cog",
+        meta: { label: '系统管理' },
+        children: [
+            {
+                path: "/system/userList",
+                name: 'userList',
+                component: UserList,
+                meta: { label: '用户管理' }
+            },
+            {
+                path: "/system/roleList",
+                name: 'roleList',
+                component: UserList,
+                meta: { label: '角色管理' }
             }
         ]
     },
@@ -57,7 +87,8 @@ let routes = [
         path: "/login",
         name: 'login',
         component: Login,
-        meta: {label: '用户登录'}
+        meta: { label: '用户登录' },
+        hidden: true
     }
 
 ];

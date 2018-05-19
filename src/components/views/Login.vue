@@ -64,7 +64,7 @@ export default {
               user: response.data
             });
             //登录成功
-            self.$router.push({ path: "/layout/home" });
+            self.$router.push({ path: "/workspace" });
           }
         })
         .catch(function(error) {
