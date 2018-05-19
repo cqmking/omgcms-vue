@@ -9,7 +9,8 @@ import { Loading, Message } from 'element-ui'
 // 超时时间
 axios.defaults.timeout = 5000
 axios.defaults.withCredentials = true
-axios.defaults.baseURL = "http://47.106.167.5"
+// axios.defaults.baseURL = "http://47.106.167.5"
+axios.defaults.baseURL = "http://127.0.0.1:8080"
 
 // http请求拦截器
 var loadinginstace

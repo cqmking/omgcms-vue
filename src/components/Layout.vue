@@ -74,6 +74,7 @@
 <script>
 import Nav from "./common/Nav";
 import { loginService } from "~/service/loginService.js";
+import { userService } from "~/service/userService.js";
 
 export default {
   name: "layout",
@@ -87,7 +88,22 @@ export default {
     },
 
     currentUser() {
-      return this.$store.getters.user;
+      let self = this;
+      if (!self.$store.getters.user.userName) {
+        userService
+          .getLoginUser()
+          .then(function(response) {
+            self.$store.dispatch({
+              type: "setUser",
+              user: response.data
+            });
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      }
+
+      return self.$store.getters.user;
     }
   },
 
@@ -108,7 +124,7 @@ export default {
       loginService
         .logout()
         .then(function(response) {
-           self.$router.push({ path: "/login" });
+          self.$router.push({ path: "/login" });
         })
         .catch(function(error) {
           console.log(error);
