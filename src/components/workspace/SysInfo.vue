@@ -1,13 +1,72 @@
 <template>
-    <h1>系统信息</h1>
+  <el-table :data="sysInfo" border style="width: 100%" :show-header="false">
+    <el-table-column prop="key" label="名称" width="280"></el-table-column>
+    <el-table-column prop="value" label="值" align="left"></el-table-column>
+  </el-table>
 </template>
 
 <script>
+import { commonService } from "~/service/commonService.js";
+
 export default {
-  methods: {}
+  data() {
+    return {
+      sysInfo: []
+    };
+  },
+
+  created() {
+    this.initData();
+  },
+
+  methods: {
+    initData() {
+      let self = this;
+      commonService.getServerInfo().then(function(response) {
+        var object = response.data;
+        let arrayData = [];
+        arrayData.push({
+          key: "操作系统名称",
+          value: object.osName
+        });
+        arrayData.push({
+          key: "操作系统构架",
+          value: object.osArch
+        });
+        arrayData.push({
+          key: "操作系统版本",
+          value: object.osVersion
+        });
+        arrayData.push({
+          key: "java虚拟机",
+          value: object.jvmName
+        });
+        arrayData.push({
+          key: "java虚拟机版本",
+          value: object.jreVersion
+        });
+        arrayData.push({
+          key: "java运行环境",
+          value: object.jreName
+        });
+        arrayData.push({
+          key: "用户的主目录",
+          value: object.userHome
+        });
+        arrayData.push({
+          key: "当前工作目录",
+          value: object.userDir
+        });
+        arrayData.push({
+          key: "用户临时文件目录",
+          value: object.tempDir
+        });
+        self.sysInfo = arrayData;
+      });
+    }
+  }
 };
 </script>
 
 <style>
-
 </style>

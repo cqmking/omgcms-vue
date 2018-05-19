@@ -54,7 +54,7 @@
         <el-container>
           <el-main>
             <!-- 面包屑导航 -->
-            <el-breadcrumb separator="/">
+            <el-breadcrumb separator="/" style="margin-bottom: 20px;">
               <template v-for="(item, n) in matchedItems">
                 <el-breadcrumb-item :to="{ path: item.path }">{{item.meta.label}}</el-breadcrumb-item>
               </template>
