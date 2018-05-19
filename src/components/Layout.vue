@@ -18,13 +18,13 @@
               <div class="pull-left image">
                 <img src="../assets/images/trump.jpg" class="img-circle" alt="User Image" style="margin-right:5px;">
                 <span class="el-dropdown-link">
-                  系统管理员
+                  {{ currentUser.userInfo.userName }}
                 </span>
               </div>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item disabled>个人中心</el-dropdown-item>
                 <el-dropdown-item disabled>设置</el-dropdown-item>
-                <el-dropdown-item divided>退出登录</el-dropdown-item>
+                <el-dropdown-item divided @click.native="logout">退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </div>
@@ -38,7 +38,7 @@
               <img src="../assets/images/trump.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-              <p>系统管理员</p>
+              <p>{{ currentUser.userInfo.userName }}</p>
               <a href="#" style="font-size: 12px; color: #444;"><i class="fa fa-circle text-success"></i> 在线</a>
             </div>
           </div>
@@ -73,6 +73,7 @@
 
 <script>
 import Nav from "./common/Nav";
+import { loginService } from "~/service/loginService.js";
 
 export default {
   name: "layout",
@@ -83,6 +84,10 @@ export default {
     matchedItems() {
       let matchedItems = this.$route.matched;
       return matchedItems;
+    },
+
+    currentUser() {
+      return this.$store.getters.user;
     }
   },
 
@@ -94,9 +99,20 @@ export default {
 
   methods: {
     collapse() {
-      
       this.isCollapse = !this.isCollapse;
       return false;
+    },
+
+    logout() {
+      let self = this;
+      loginService
+        .logout()
+        .then(function(response) {
+           self.$router.push({ path: "/login" });
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     }
   },
   components: { Nav }

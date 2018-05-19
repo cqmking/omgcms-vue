@@ -33,10 +33,6 @@ axios.interceptors.response.use(data => {// 响应成功关闭loading
     return data
 }, error => {
     
-    if(error.response.status == 401){
-        //未登录
-        console.error("未登录");
-    }
     if(error.response.data && error.response.data.message){
         Message.error({
             message: error.response.data.message

@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import { Message } from "element-ui";
 import { loginService } from "~/service/loginService.js";
 
 export default {
@@ -45,10 +46,26 @@ export default {
   },
   methods: {
     onSubmit() {
+      let self = this;
       loginService
-        .loginByScreenName(this.form.screenName, this.form.password)
+        .loginByScreenName({
+          screenName: this.form.screenName,
+          password: this.form.password
+        })
         .then(function(response) {
-          console.log(response);
+          if (response.status != 200) {
+            //登录认证失败
+            Message.error({
+              message: response.data.message
+            });
+          } else {
+            self.$store.dispatch({
+              type: "setUser",
+              user: response.data
+            });
+            //登录成功
+            self.$router.push({ path: "/layout/home" });
+          }
         })
         .catch(function(error) {
           console.log(error);

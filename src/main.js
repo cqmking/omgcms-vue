@@ -8,6 +8,8 @@ import 'font-awesome/css/font-awesome.min.css'
 import VueRouter from 'vue-router'
 
 import routes from './routes/routes'
+import store from './store'
+
 // import axios from 'axios'
 import axios from './http.js'
 
@@ -22,6 +24,7 @@ Vue.prototype.$http = axios;
 
 new Vue({
   router,
+  store,
   el: '#app',
   render: h => h(App)
 })
