@@ -94,18 +94,7 @@ export default {
 
   methods: {
     collapse() {
-      this.$http
-        .post("http://47.106.167.5/omgcms/api/login", {
-          screenName: "admin",
-          password: "1234561"
-        })
-        .then(function(response) {
-          console.log(response);
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-
+      
       this.isCollapse = !this.isCollapse;
       return false;
     }

@@ -1,7 +1,7 @@
 import Layout from '../components/Layout.vue'
 import Home from '../components/home/Home.vue'
 import UserList from '../components/user/UserList'
-import Login from '../views/Login.vue'
+import Login from '../components/views/Login.vue'
 
 let routes = [
     {

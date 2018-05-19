@@ -32,17 +32,27 @@
 </template>
 
 <script>
+import { loginService } from "~/service/loginService.js";
+
 export default {
   data() {
     return {
       form: {
         screenName: "",
-        password: "",
+        password: ""
       }
     };
   },
   methods: {
     onSubmit() {
+      loginService
+        .loginByScreenName(this.form.screenName, this.form.password)
+        .then(function(response) {
+          console.log(response);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
       console.log("submit!");
     }
   }
