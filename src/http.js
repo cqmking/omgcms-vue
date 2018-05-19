@@ -6,6 +6,13 @@ import axios from 'axios'
 import QS from 'qs';
 import { Loading, Message } from 'element-ui'
 
+import VueRouter from 'vue-router'
+import routes from './routes/routes'
+
+const router = new VueRouter({
+    routes
+})
+
 // 超时时间
 axios.defaults.timeout = 5000
 axios.defaults.withCredentials = true
@@ -17,7 +24,7 @@ var loadinginstace
 axios.interceptors.request.use(config => {
     // element ui Loading方法
     loadinginstace = Loading.service({ fullscreen: true })
-    if(config.method=="post"){
+    if (config.method == "post") {
         config.data = QS.stringify(config.data);
     }
     return config
@@ -34,7 +41,9 @@ axios.interceptors.response.use(data => {// 响应成功关闭loading
     return data
 }, error => {
     
-    if(error.response.data && error.response.data.message){
+    if (error.response.status == "401") {
+        window.location.href="/"
+    } else if (error.response.data && error.response.data.message) {
         Message.error({
             message: error.response.data.message
         })

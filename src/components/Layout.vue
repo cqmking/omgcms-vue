@@ -1,6 +1,6 @@
 <template>
 
-  <div id="layout" :class="{'sidebar-collapse':isCollapse}">
+  <div id="layout" :class="{'sidebar-collapse':isCollapse}" class="layout">
     <el-container>
       <el-header style="height:50px; line-height:50px;">
         <a href="../../index2.html" class="logo">
@@ -189,6 +189,11 @@ export default {
   width: 50px !important;
 }
 
+.layout {
+  height: 100%;
+  background-color: #e9eef3;
+}
+
 .el-header .logo-mini {
   display: none;
 }
@@ -328,7 +333,6 @@ export default {
 }
 
 .el-main {
-  background-color: #e9eef3;
   color: #333;
   text-align: center;
   margin-left: 230px;

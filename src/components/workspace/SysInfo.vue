@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="sysInfo" border style="width: 100%" :show-header="false">
+  <el-table :data="sysInfo" border style="width: 100%" :show-header="false" size="small">
     <el-table-column prop="key" label="名称" width="280"></el-table-column>
     <el-table-column prop="value" label="值" align="left"></el-table-column>
   </el-table>
@@ -60,6 +60,18 @@ export default {
         arrayData.push({
           key: "用户临时文件目录",
           value: object.tempDir
+        });
+        arrayData.push({
+          key: "最大内存",
+          value: object.maxMemory + " MB"
+        });
+        arrayData.push({
+          key: "已用内存",
+          value: object.totalMemory + " MB"
+        });
+        arrayData.push({
+          key: "空闲内存",
+          value: object.freeMemory + " MB"
         });
         self.sysInfo = arrayData;
       });
