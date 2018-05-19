@@ -31,6 +31,7 @@ body {
   font-family: 'Microsoft YaHei', Helvetica, sans-serif;
 }
 
+
 a {
   text-decoration: none;
 }
@@ -39,4 +40,11 @@ img {
   vertical-align: middle;
   border: 0;
 }
+
+.el-input__inner,
+.el-button--small {
+  border-radius: 0;
+  font-size: 14px;
+}
+
 </style>

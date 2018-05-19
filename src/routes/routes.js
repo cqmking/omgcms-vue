@@ -1,11 +1,12 @@
 import Layout from '../components/Layout.vue'
 import Home from '../components/home/Home.vue'
 import UserList from '../components/user/UserList'
+import Login from '../views/Login.vue'
 
 let routes = [
     {
         path: '/',
-        redirect: 'layout/home'
+        redirect: '/login'
     },
     {
         path: '/layout',
@@ -51,6 +52,13 @@ let routes = [
             }
         ]
     },
+    {
+        //Login
+        path: "/login",
+        name: 'login',
+        component: Login,
+        meta: {label: '用户登录'}
+    }
 
 ];
 
