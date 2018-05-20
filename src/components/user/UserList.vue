@@ -25,14 +25,14 @@ export default {
     };
   },
   created() {
-    let self = this;
-    self.loadUserList(self.params);
+    let _self = this;
+    _self.loadUserList(_self.params);
   },
   methods: {
     loadUserList(params) {
-      let self = this;
+      let _self = this;
       userService.getUserList(params).then(function(response) {
-        self.listData = response.data;
+        _self.listData = response.data;
       });
     }
   }
