@@ -152,6 +152,9 @@ export default {
 .sidebar-collapse .el-main,
 .sidebar-collapse .el-header .navbar {
   margin-left: 50px !important;
+  -webkit-transition: margin-left 0.3s ease-in-out;
+  -o-transition: margin-left 0.3s ease-in-out;
+  transition: margin-left 0.3s ease-in-out;
 }
 
 .sidebar-collapse .el-aside {
@@ -337,6 +340,9 @@ export default {
   text-align: center;
   margin-left: 230px;
   min-height: 350px;
+  -webkit-transition: margin-left 0.3s ease-in-out;
+  -o-transition: margin-left 0.3s ease-in-out;
+  transition: margin-left 0.3s ease-in-out;
 }
 
 body > .el-container {
