@@ -2,14 +2,12 @@
   <div class="sub-content">
 
     <div class="btn-bar" style="text-align:left; margin:10px 0;">
-      <el-button type="primary" icon="el-icon-circle-plus-outline" size="medium">新增</el-button>
-      <el-button-group>
-        <el-button type="warning" icon="el-icon-edit" size="medium">修改</el-button>
-        <el-button type="danger" icon="el-icon-delete" size="medium">删除</el-button>
-      </el-button-group>
+      <el-button type="primary" icon="el-icon-circle-plus-outline" size="medium" @click="handleCreateUser">新增</el-button>
+      <el-button v-show="selected.length == 1" type="warning" icon="el-icon-edit" size="medium" @click="handUpdateUser(selected[0].userId)">修改</el-button>
+      <el-button v-show="selected.length > 0" type="danger" icon="el-icon-delete" size="medium">删除</el-button>
     </div>
 
-    <el-table :data="listData.content" border style="width: 100%" size="medium">
+    <el-table :data="listData.content" border style="width: 100%" size="medium" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center"></el-table-column>
       <el-table-column prop="userId" label="ID" width="80" align="center"></el-table-column>
       <el-table-column prop="screenName" label="账号" width="120" align="left"></el-table-column>
@@ -22,8 +20,8 @@
       <el-table-column prop="createDate" label="创建时间" width="160" align="center" :formatter="$common.formateDate"></el-table-column>
       <el-table-column fixed="right" label="操作" width="150" align="center" >
         <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-          <el-button type="text" size="small">编辑</el-button>
+          <el-button @click="handleViewUser(scope.row)" type="text" size="small">查看</el-button>
+          <el-button type="text" size="small" @click="handUpdateUser(scope.row.userId)">编辑</el-button>
           <el-button type="text" style="color:#f56c6c;" size="small">删除</el-button>
         </template>
       </el-table-column>
@@ -48,7 +46,8 @@ export default {
         content: [],
         totalElements: 0
       },
-      params: { pageNo: 1, pageSize: 10 }
+      params: { pageNo: 1, pageSize: 10 },
+      selected: []
     };
   },
   created() {
@@ -71,6 +70,28 @@ export default {
       let _self = this;
       _self.params.pageNo = val;
       _self.loadUserList(_self.params);
+    },
+
+    handleSelectionChange(val) {
+      let _self = this;
+      _self.selected = val;
+    },
+
+    handleCreateUser() {
+      let _self = this;
+      _self.$router.push({ name: "userAdd" });
+    },
+
+    handleViewUser(user) {
+      let _self = this;
+      console.log(user)
+    },
+
+    handUpdateUser(userId) {
+      let _self = this;
+      //router.push({ name: 'userEdit', params: { userId }}) // -> /userEdit/123
+      // console.log("userId:"+userId);
+      _self.$router.push({ name: "userEdit", params: { userId } });
     }
   }
 };

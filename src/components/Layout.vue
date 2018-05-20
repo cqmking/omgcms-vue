@@ -74,12 +74,13 @@
   
   </div>
 </template>
+
 <style>
-.breadcrumb-link{
-    font-weight: 700;
-    text-decoration: none;
-    transition: color .2s cubic-bezier(.645,.045,.355,1);
-    color: #303133;
+.breadcrumb-link {
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  color: #303133;
 }
 </style>
 
@@ -132,17 +133,9 @@ export default {
   },
 
   methods: {
-    gotoPage(item) {
-      let _self = this;
-      console.log("AAAA:" + item.name);
-      // _self.$router.push({ path: item.path });
-      return false;
-    },
-
     loadMatchedItems() {
       let _self = this;
       _self.matchedItems = _self.$route.matched;
-      console.log("刷新面包屑");
     },
 
     collapse() {

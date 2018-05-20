@@ -86,6 +86,13 @@ let routes = [
                 meta: { label: '添加用户' }
             },
             {
+                path: "/system/userEdit",
+                name: 'userEdit',
+                component: UserEdit,
+                hidden: true,
+                meta: { label: '修改用户' }
+            },
+            {
                 path: "/system/roleList",
                 name: 'roleList',
                 component: RoleList,
