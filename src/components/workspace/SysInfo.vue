@@ -1,8 +1,10 @@
 <template>
-  <el-table :data="sysInfo" border style="width: 100%" :show-header="false" size="small">
-    <el-table-column prop="key" label="名称" width="280"></el-table-column>
-    <el-table-column prop="value" label="值" align="left"></el-table-column>
-  </el-table>
+  <div class="sub-content">
+    <el-table :data="sysInfo" border style="width: 100%" :show-header="false" size="medium">
+      <el-table-column prop="key" label="名称" width="280"></el-table-column>
+      <el-table-column prop="value" label="值" align="left"></el-table-column>
+    </el-table>
+  </div>
 </template>
 
 <script>
