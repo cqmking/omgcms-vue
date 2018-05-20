@@ -6,6 +6,8 @@ import Dashboard from '../components/workspace/Dashboard'
 import ArticleList from '../components/contents/ArticleList'
 
 import UserList from '../components/user/UserList'
+import RoleList from '../components/user/RoleList'
+
 import Login from '../components/views/Login.vue'
 
 let routes = [
@@ -77,7 +79,7 @@ let routes = [
             {
                 path: "/system/roleList",
                 name: 'roleList',
-                component: UserList,
+                component: RoleList,
                 meta: { label: '角色管理' }
             }
         ]

@@ -28,9 +28,8 @@ body {
   margin: 0;
   font-size: 14px;
   background-color: #e9eef3;
-  font-family: 'Microsoft YaHei', Helvetica, sans-serif;
+  font-family: "Microsoft YaHei", Helvetica, sans-serif;
 }
-
 
 a {
   text-decoration: none;
@@ -47,4 +46,18 @@ img {
   font-size: 14px;
 }
 
+.sub-content {
+  background-color: #fff;
+  padding: 10px 15px;
+}
+
+.el-table--medium td,
+.el-table--medium th {
+  padding: 8px 0;
+}
+
+td .el-button--small,
+td .el-button--small.is-round {
+  padding: 3px 0px;
+}
 </style>

@@ -1,15 +1,41 @@
 <template>
-  <el-table :data="listData.content" border style="width: 100%" size="small">
-    <el-table-column prop="userId" label="ID" width="80" align="center"></el-table-column>
-    <el-table-column prop="screenName" label="账号" width="120" align="left"></el-table-column>
-    <el-table-column prop="userName" label="姓名" width="120" align="left"></el-table-column>
-    <el-table-column prop="sex" label="性别" width="80" align="center"></el-table-column>
-    <el-table-column prop="email" label="邮箱地址" align="left"></el-table-column>
-    <el-table-column prop="jobTitle" label="职位" width="180" align="center"></el-table-column>
-    <el-table-column prop="address" label="地址" align="left"></el-table-column>
-    <el-table-column prop="lastLoginDate" label="上次登录时间" align="center" :formatter="$common.formateDate"></el-table-column>
-    <el-table-column prop="createDate" label="创建时间" align="center" :formatter="$common.formateDate"></el-table-column>
-  </el-table>
+  <div class="sub-content">
+
+    <div class="btn-bar" style="text-align:left; margin:10px 0;">
+      <el-button type="primary" icon="el-icon-circle-plus-outline" size="medium">新增</el-button>
+      <el-button-group>
+        <el-button type="warning" icon="el-icon-edit" size="medium">修改</el-button>
+        <el-button type="danger" icon="el-icon-delete" size="medium">删除</el-button>
+      </el-button-group>
+    </div>
+
+    <el-table :data="listData.content" border style="width: 100%" size="medium">
+      <el-table-column type="selection" width="55" align="center"></el-table-column>
+      <el-table-column prop="userId" label="ID" width="80" align="center"></el-table-column>
+      <el-table-column prop="screenName" label="账号" width="120" align="left"></el-table-column>
+      <el-table-column prop="userName" label="姓名" width="120" align="left"></el-table-column>
+      <el-table-column prop="sex" label="性别" width="80" align="center"></el-table-column>
+      <el-table-column prop="email" label="邮箱地址" width="200" align="left" show-overflow-tooltip></el-table-column>
+      <el-table-column prop="jobTitle" label="职位" width="100" align="center"></el-table-column>
+      <el-table-column prop="address" label="地址" align="left" min-width="150" show-overflow-tooltip></el-table-column>
+      <el-table-column prop="lastLoginDate" label="上次登录时间" width="160" align="center" :formatter="$common.formateDate"></el-table-column>
+      <el-table-column prop="createDate" label="创建时间" width="160" align="center" :formatter="$common.formateDate"></el-table-column>
+      <el-table-column fixed="right" label="操作" width="150" align="center" >
+        <template slot-scope="scope">
+          <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+          <el-button type="text" size="small">编辑</el-button>
+          <el-button type="text" style="color:#f56c6c;" size="small">删除</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+
+    <div class="block" style="text-align:right; padding: 20px 0 10px 0;">
+      <el-pagination background  @size-change="handleSizeChange" @current-change="handleCurrentPageNoChange" :current-page="params.pageNo"
+        :page-sizes="[10, 20, 30, 40, 50]" :page-size="params.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="listData.totalElements">
+      </el-pagination>
+    </div>
+
+  </div>
 </template>
 
 <script>
@@ -19,7 +45,8 @@ export default {
   data() {
     return {
       listData: {
-        content: []
+        content: [],
+        totalElements: 0
       },
       params: { pageNo: 1, pageSize: 10 }
     };
@@ -34,6 +61,16 @@ export default {
       userService.getUserList(params).then(function(response) {
         _self.listData = response.data;
       });
+    },
+    handleSizeChange(val) {
+      let _self = this;
+      _self.params.pageSize = val;
+      _self.loadUserList(_self.params);
+    },
+    handleCurrentPageNoChange(val) {
+      let _self = this;
+      _self.params.pageNo = val;
+      _self.loadUserList(_self.params);
     }
   }
 };
