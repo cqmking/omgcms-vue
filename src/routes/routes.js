@@ -62,17 +62,17 @@ let routes = [
     },
     {
         path: '/system',
-        redirect: { name: 'articles' },
+        redirect: { name: 'userList' },
         component: Layout,
         name: 'system',
         iconClass: "fa-cog",
-        meta: { label: '系统管理' },
+        meta: { label: '用户管理' },
         children: [
             {
                 path: "/system/userList",
                 name: 'userList',
                 component: UserList,
-                meta: { label: '用户管理' }
+                meta: { label: '成员管理' }
             },
             {
                 path: "/system/roleList",

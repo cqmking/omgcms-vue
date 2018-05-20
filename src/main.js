@@ -10,8 +10,9 @@ import VueRouter from 'vue-router'
 import routes from './routes/routes'
 import store from './store'
 
-// import axios from 'axios'
-import axios from './http.js'
+import common from './js/common'
+
+Vue.prototype.$common = common;
 
 const router = new VueRouter({
   routes
@@ -19,8 +20,6 @@ const router = new VueRouter({
 
 Vue.use(ElementUI)
 Vue.use(VueRouter)
-
-Vue.prototype.$http = axios;
 
 new Vue({
   router,
