@@ -54,11 +54,15 @@
         <el-container>
           <el-main>
             <!-- 面包屑导航 -->
-            <el-breadcrumb separator="/" style="margin-bottom: 20px;">
-              <template v-for="(item, n) in matchedItems">
-                <el-breadcrumb-item :to="{ path: item.path }">{{item.meta.label}}</el-breadcrumb-item>
+            
+            <div class="el-breadcrumb" style="margin-bottom: 20px; text-align: left;">
+              <template v-for="(item, index) in matchedItems" :data-path="item.path"  :to="item.path">
+                <router-link v-if="(matchedItems.length -1 ) != index" class="breadcrumb-link" :to="{ path: item.path }">{{item.meta.label}}</router-link>
+                <span v-if="(matchedItems.length -1 ) != index" style="margin: 0 9px; font-weight: 700; color: #c0c4cc;">/</span>
+                <span v-else style="    font-weight: 400; color: #606266; cursor: text;">{{item.meta.label}}</span>
+                <!-- <a @click="gotoPage(item)">{{item.meta.label}}</a> -->
               </template>
-            </el-breadcrumb>
+            </div>
 
             <router-view></router-view>
             
@@ -70,6 +74,15 @@
   
   </div>
 </template>
+<style>
+.breadcrumb-link{
+    font-weight: 700;
+    text-decoration: none;
+    transition: color .2s cubic-bezier(.645,.045,.355,1);
+    color: #303133;
+}
+</style>
+
 
 <script>
 import Nav from "./common/Nav";
@@ -79,14 +92,12 @@ import { userService } from "~/service/userService.js";
 export default {
   name: "layout",
 
-  created: () => {},
+  created() {
+    let _self = this;
+    _self.loadMatchedItems();
+  },
 
   computed: {
-    matchedItems() {
-      let matchedItems = this.$route.matched;
-      return matchedItems;
-    },
-
     currentUser() {
       let self = this;
       if (!self.$store.getters.user.userName) {
@@ -109,22 +120,42 @@ export default {
 
   data: () => {
     return {
-      isCollapse: false
+      isCollapse: false,
+      matchedItems: []
     };
   },
 
+  watch: {
+    $route() {
+      this.loadMatchedItems();
+    }
+  },
+
   methods: {
+    gotoPage(item) {
+      let _self = this;
+      console.log("AAAA:" + item.name);
+      // _self.$router.push({ path: item.path });
+      return false;
+    },
+
+    loadMatchedItems() {
+      let _self = this;
+      _self.matchedItems = _self.$route.matched;
+      console.log("刷新面包屑");
+    },
+
     collapse() {
       this.isCollapse = !this.isCollapse;
       return false;
     },
 
     logout() {
-      let self = this;
+      let _self = this;
       loginService
         .logout()
         .then(function(response) {
-          self.$router.push({ path: "/login" });
+          _self.$router.push({ path: "/login" });
         })
         .catch(function(error) {
           console.log(error);
