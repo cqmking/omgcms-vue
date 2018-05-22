@@ -20,7 +20,7 @@
             <el-button style="width:100%; border-radius:0;" type="primary" @click="onSubmit">登录</el-button>
           </el-form-item>
           <el-form-item style="text-align:right;">
-            <a href="#">忘记密码</a>
+            <a href="#" style="margin-right: 10px;">忘记密码</a>
             <a href="#">免费注册</a>
           </el-form-item>
       </el-form>
@@ -84,13 +84,20 @@ export default {
   overflow-y: auto;
 }
 
+.login-box .el-input__inner,
+.login-box .el-button--small {
+  border-radius: 0;
+  font-size: 14px;
+}
+
+
 .login-box {
   width: 360px;
   margin: 0 auto;
   padding: 7% 0 2% 0;
 }
 
-.login-logo {
+.login-logo  {
   font-size: 35px;
   text-align: center;
   margin-bottom: 25px;
@@ -117,4 +124,5 @@ export default {
 .login-box-body a {
   color: #9b9ea0;
 }
+
 </style>

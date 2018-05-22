@@ -17,6 +17,7 @@ export default {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  font-family: "Microsoft YaHei", Helvetica, sans-serif;
 }
 
 body,
@@ -26,9 +27,7 @@ html {
 
 body {
   margin: 0;
-  font-size: 14px;
   background-color: #e9eef3;
-  font-family: "Microsoft YaHei", Helvetica, sans-serif;
 }
 
 a {
@@ -40,15 +39,11 @@ img {
   border: 0;
 }
 
-.el-input__inner,
-.el-button--small {
-  border-radius: 0;
-  font-size: 14px;
-}
 
 .sub-content {
   background-color: #fff;
   padding: 10px 15px;
+  min-width: 750px;
 }
 
 .el-table--medium td,

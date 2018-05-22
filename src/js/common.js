@@ -9,5 +9,11 @@ export default {
             return "无记录";
         }
         return moment(cellValue).format("YYYY-MM-DD HH:mm:ss")
+    },
+    constant: {
+        sex: {
+            1: "男",
+            2: "女"
+        }
     }
 };
