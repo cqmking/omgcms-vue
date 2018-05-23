@@ -15,6 +15,18 @@
         </el-row>
         <el-row :gutter="20">
           <el-col :span="12">
+            <el-form-item label="密码" prop="password">
+              <el-input v-model="userForm.password" placeholder="留空不修改"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="确认密码" prop="rePassword">
+              <el-input v-model="userForm.rePassword" placeholder="留空不修改"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row :gutter="20">
+          <el-col :span="12">
             <el-form-item label="用户名称" prop="userName">
               <el-input v-model="userForm.userName"></el-input>
             </el-form-item>
@@ -83,6 +95,15 @@ export default {
     }
   },
   data() {
+    let _self = this;
+    var validateRePassword = (rule, value, callback) => {
+      if (_self.userForm.password === value) {
+        callback();
+        return;
+      }
+
+      callback(new Error("两次输入密码不一致!"));
+    };
     return {
       userForm: {
         userId: 0,
@@ -94,7 +115,9 @@ export default {
         description: "",
         address: "",
         sex: "1",
-        phone: ""
+        phone: "",
+        password: "",
+        rePassword: ""
       },
       rules: {
         screenName: [
@@ -150,7 +173,11 @@ export default {
             trigger: "blur"
           },
           { max: 20, message: "长度不能超过 20 个字符", trigger: "blur" }
-        ]
+        ],
+        password: [
+          { max: 20, message: "长度不能超过 20 个字符", trigger: "blur" }
+        ],
+        rePassword: [{ validator: validateRePassword, trigger: "blur" }]
       }
     };
   },
@@ -160,6 +187,8 @@ export default {
       let params = { userId: _self.userForm.userId };
       userService.getUserById(params).then(function(response) {
         _self.userForm = response.data;
+        _self.userForm.password = "";
+        _self.userForm.rePassword = "";
       });
     },
 
@@ -176,7 +205,6 @@ export default {
             });
             _self.$router.push({ name: "userList" });
           });
-
         } else {
           console.log("error submit!!");
           return false;
