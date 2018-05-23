@@ -12,12 +12,12 @@
       <el-table-column prop="userId" label="ID" width="80" align="center"></el-table-column>
       <el-table-column prop="screenName" label="账号" width="120" align="left"></el-table-column>
       <el-table-column prop="userName" label="姓名" width="120" align="left"></el-table-column>
-      <el-table-column prop="sex" label="性别" width="80" align="center"></el-table-column>
+      <el-table-column prop="sex" label="性别" width="80" align="center" :formatter="formatSex"></el-table-column>
       <el-table-column prop="email" label="邮箱地址" width="200" align="left" show-overflow-tooltip></el-table-column>
       <el-table-column prop="jobTitle" label="职位" width="100" align="center"></el-table-column>
       <el-table-column prop="address" label="地址" align="left" min-width="150" show-overflow-tooltip></el-table-column>
-      <el-table-column prop="lastLoginDate" label="上次登录时间" width="160" align="center" :formatter="$common.formateDate"></el-table-column>
-      <el-table-column prop="createDate" label="创建时间" width="160" align="center" :formatter="$common.formateDate"></el-table-column>
+      <el-table-column prop="lastLoginDate" label="上次登录时间" width="160" align="center" :formatter="$common.formatDate"></el-table-column>
+      <el-table-column prop="createDate" label="创建时间" width="160" align="center" :formatter="$common.formatDate"></el-table-column>
       <el-table-column fixed="right" label="操作" width="150" align="center" >
         <template slot-scope="scope">
           <el-button @click="handleViewUser(scope.row)" type="text" size="small">查看</el-button>
@@ -55,6 +55,13 @@ export default {
     _self.loadUserList(_self.params);
   },
   methods: {
+    formatSex(row, column, cellValue, index) {
+        
+        if (!cellValue || cellValue == "") {
+            return "-";
+        }
+        return this.$common.data.sex[cellValue];
+    },
     loadUserList(params) {
       let _self = this;
       userService.getUserList(params).then(function(response) {
@@ -84,7 +91,7 @@ export default {
 
     handleViewUser(user) {
       let _self = this;
-      console.log(user)
+      console.log(user);
     },
 
     handUpdateUser(userId) {
