@@ -11,5 +11,7 @@ export const userService = {
 
     getUserById: (params) => httpRequest({ url: '/omgcms/api/user', method: 'get', params }),
 
-    deleteUserById: (params) => httpRequest({ url: '/omgcms/api/user', method: 'delete', params })
+    deleteUserById: (params) => httpRequest({ url: '/omgcms/api/user', method: 'delete', params }),
+
+    deleteUserByIds: (params) => httpRequest({ url: '/omgcms/api/users', method: 'delete', params })
 }

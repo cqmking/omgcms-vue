@@ -4,7 +4,7 @@
     <div class="btn-bar" style="text-align:left; margin:10px 0;">
       <el-button type="primary" icon="el-icon-circle-plus-outline" size="medium" @click="handleCreateUser">新增</el-button>
       <el-button v-show="selected.length == 1" type="warning" icon="el-icon-edit" size="medium" @click="handUpdateUser(selected[0].userId)">修改</el-button>
-      <el-button v-show="selected.length > 0" type="danger" icon="el-icon-delete" size="medium">删除</el-button>
+      <el-button v-show="selected.length > 0" type="danger" icon="el-icon-delete" size="medium" @click="handleBatchDeleteUser(selected)">删除</el-button>
     </div>
 
     <el-table :data="listData.content" border style="width: 100%" size="medium" @selection-change="handleSelectionChange">
@@ -102,14 +102,42 @@ export default {
 
     handleDeleteUser(user) {
       let _self = this;
-      _self.$confirm("确认删除该用户, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      })
+      _self
+        .$confirm("确认删除该用户, 是否继续?", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
+        })
         .then(() => {
           let params = { userId: user.userId };
           userService.deleteUserById(params).then(function(response) {
+            _self.$message({
+              type: "success",
+              message: "删除成功!"
+            });
+            _self.loadUserList(_self.params);
+          });
+        })
+        .catch(() => {});
+    },
+
+    handleBatchDeleteUser(userList) {
+      let _self = this;
+      let userIdArray = [];
+
+      userList.forEach(function(user) {
+        userIdArray.push(user.userId);
+      });
+
+      _self
+        .$confirm("确认删除以下用户, 是否继续?", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
+        })
+        .then(() => {
+          let params = { userIds: userIdArray };
+          userService.deleteUserByIds(params).then(function(response) {
             _self.$message({
               type: "success",
               message: "删除成功!"
