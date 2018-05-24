@@ -210,6 +210,7 @@ export default {
 .custom-table .el-row .el-col {
   border-left: 1px solid #ebeef5;
   padding: 8px 10px;
+  min-height: 35px;
 }
 
 .custom-table .el-row .el-col:nth-child(odd) {
