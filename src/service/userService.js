@@ -9,5 +9,7 @@ export const userService = {
     //参数必须用data，使用params传递会转为queryString提交
     saveUser: (data) => httpRequest({ url: '/omgcms/api/user', method: 'post', data }),
 
-    getUserById: (params) => httpRequest({ url: '/omgcms/api/user', method: 'get', params })
+    getUserById: (params) => httpRequest({ url: '/omgcms/api/user', method: 'get', params }),
+
+    deleteUserById: (params) => httpRequest({ url: '/omgcms/api/user', method: 'delete', params })
 }

@@ -25,7 +25,6 @@ axios.interceptors.request.use(config => {
     // element ui Loading方法
     loadinginstace = Loading.service({ fullscreen: true })
     if (config.method == "post") {
-        
         config.data = QS.stringify(config.data);
     } else {
         config.data = QS.stringify(config.data);
@@ -43,8 +42,13 @@ axios.interceptors.response.use(data => {// 响应成功关闭loading
     loadinginstace.close()
     return data
 }, error => {
+    if (typeof error.response == "undefined") {
+        let msg = error.message;
+        Message.error({
+            message: msg
+        })
 
-    if (error.response.status == "401") {
+    } else if (error.response.status == "401") {
         window.location.href = "/"
     } else if (error.response.data && error.response.data.message) {
         Message.error({

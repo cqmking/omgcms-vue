@@ -20,9 +20,9 @@
       <el-table-column prop="createDate" label="创建时间" width="160" align="center" :formatter="$common.formatDate"></el-table-column>
       <el-table-column fixed="right" label="操作" width="150" align="center" >
         <template slot-scope="scope">
-          <el-button @click="handleViewUser(scope.row)" type="text" size="small">查看</el-button>
+          <el-button type="text" size="small" @click="handleViewUser(scope.row)">查看</el-button>
           <el-button type="text" size="small" @click="handUpdateUser(scope.row.userId)">编辑</el-button>
-          <el-button type="text" style="color:#f56c6c;" size="small">删除</el-button>
+          <el-button type="text" style="color:#f56c6c;" size="small" @click="handleDeleteUser(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -56,11 +56,10 @@ export default {
   },
   methods: {
     formatSex(row, column, cellValue, index) {
-        
-        if (!cellValue || cellValue == "") {
-            return "-";
-        }
-        return this.$common.data.sex[cellValue];
+      if (!cellValue || cellValue == "") {
+        return "-";
+      }
+      return this.$common.data.sex[cellValue];
     },
     loadUserList(params) {
       let _self = this;
@@ -99,6 +98,26 @@ export default {
       //router.push({ name: 'userEdit', params: { userId }}) // -> /userEdit/123
       // console.log("userId:"+userId);
       _self.$router.push({ name: "userEdit", params: { userId } });
+    },
+
+    handleDeleteUser(user) {
+      let _self = this;
+      _self.$confirm("确认删除该用户, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          let params = { userId: user.userId };
+          userService.deleteUserById(params).then(function(response) {
+            _self.$message({
+              type: "success",
+              message: "删除成功!"
+            });
+            _self.loadUserList(_self.params);
+          });
+        })
+        .catch(() => {});
     }
   }
 };
