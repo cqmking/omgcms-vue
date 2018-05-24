@@ -1,5 +1,5 @@
 <template>
-  <div class="sub-content">
+  <div class="sub-content user-list">
 
     <div class="btn-bar" style="text-align:left; margin:10px 0;">
       <el-button type="primary" icon="el-icon-circle-plus-outline" size="medium" @click="handleCreateUser">新增</el-button>
@@ -33,8 +33,50 @@
       </el-pagination>
     </div>
 
+    <el-dialog title="用户详情" :visible.sync="showUserDetail" style="text-align:left;">
+      <div class="custom-table" style="padding: 0;">
+        <el-row :gutter="20">
+          <el-col :span="3">用户ID：</el-col>
+          <el-col :span="8">{{showUser.userId}}</el-col>
+          <el-col :span="3">用户账号</el-col>
+          <el-col :span="8">{{showUser.screenName}}</el-col>
+        </el-row>
+        <el-row :gutter="20">
+          <el-col :span="3">用户名称：</el-col>
+          <el-col :span="8">{{showUser.userName}}</el-col>
+          <el-col :span="3">邮箱地址</el-col>
+          <el-col :span="8">{{showUser.email}}</el-col>
+        </el-row>
+        <el-row :gutter="20">
+          <el-col :span="3">职位：</el-col>
+          <el-col :span="8">{{showUser.jobTitle}}</el-col>
+          <el-col :span="3">生日</el-col>
+          <el-col :span="8">{{$common.formatDateEx(showUser.birthday)}}</el-col>
+        </el-row>
+        <el-row :gutter="20">
+          <el-col :span="3">性别：</el-col>
+          <el-col :span="8">{{$common.data.sex[showUser.sex]}}</el-col>
+          <el-col :span="3">电话</el-col>
+          <el-col :span="8">{{showUser.phone}}</el-col>
+        </el-row>
+        <el-row :gutter="20">
+          <el-col :span="3">住址：</el-col>
+          <el-col :span="21">{{showUser.address}}</el-col>
+        </el-row>
+        <el-row :gutter="20">
+          <el-col :span="3">描述：</el-col>
+          <el-col :span="21">{{showUser.description}}</el-col>
+        </el-row>
+      </div>
+      <div style="margin:20px 0 10px 0; text-align:right;">
+        <el-button size="medium " @click="showUserDetail=!showUserDetail">关闭</el-button>
+      </div>
+    </el-dialog>
+
   </div>
 </template>
+
+
 
 <script>
 import { userService } from "~/service/userService.js";
@@ -47,7 +89,9 @@ export default {
         totalElements: 0
       },
       params: { pageNo: 1, pageSize: 10 },
-      selected: []
+      selected: [],
+      showUserDetail: false,
+      showUser: {}
     };
   },
   created() {
@@ -90,7 +134,8 @@ export default {
 
     handleViewUser(user) {
       let _self = this;
-      console.log(user);
+      _self.showUserDetail = true;
+      _self.showUser = user;
     },
 
     handUpdateUser(userId) {
@@ -152,4 +197,31 @@ export default {
 </script>
 
 <style>
+.custom-table {
+  border-bottom: 1px solid #ebeef5;
+}
+
+.custom-table .el-row {
+  border: 1px solid #ebeef5;
+  border-width: 1px 1px 0 0;
+  margin: 0 !important;
+}
+
+.custom-table .el-row .el-col {
+  border-left: 1px solid #ebeef5;
+  padding: 8px 10px;
+}
+
+.custom-table .el-row .el-col:nth-child(odd) {
+  text-align: right;
+  color: #888;
+}
+
+.custom-table .el-row .el-col:nth-child(even) {
+  text-align: left;
+}
+
+.user-list .el-dialog__body {
+  padding: 10px 20px;
+}
 </style>
