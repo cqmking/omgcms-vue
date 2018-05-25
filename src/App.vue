@@ -55,4 +55,9 @@ td .el-button--small,
 td .el-button--small.is-round {
   padding: 3px 0px;
 }
+
+.el-input--medium .el-input__inner {
+    height: 32px;
+    line-height: 32px;
+}
 </style>

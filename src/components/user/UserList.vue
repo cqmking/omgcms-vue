@@ -2,9 +2,20 @@
   <div class="sub-content user-list">
 
     <div class="btn-bar" style="text-align:left; margin:10px 0;">
-      <el-button type="primary" icon="el-icon-circle-plus-outline" size="medium" @click="handleCreateUser">新增</el-button>
-      <el-button v-show="selected.length == 1" type="warning" icon="el-icon-edit" size="medium" @click="handUpdateUser(selected[0].userId)">修改</el-button>
-      <el-button v-show="selected.length > 0" type="danger" icon="el-icon-delete" size="medium" @click="handleBatchDeleteUser(selected)">删除</el-button>
+      
+      <el-row :gutter="20">
+          <el-col :span="8" style="min-width: 320px;">
+            <el-button type="primary" icon="el-icon-circle-plus-outline" size="medium" @click="handleCreateUser">新增</el-button>
+            <el-button v-show="selected.length == 1" type="warning" icon="el-icon-edit" size="medium" @click="handUpdateUser(selected[0].userId)">修改</el-button>
+            <el-button v-show="selected.length > 0" type="danger" icon="el-icon-delete" size="medium" @click="handleBatchDeleteUser(selected)">删除</el-button>
+          </el-col>
+          <el-col :span="16" style="text-align:right;" class="search-group">
+            用户账号：<el-input size="medium" v-model="searchParams.screenName" clearable></el-input>
+            用户名称：<el-input size="medium" v-model="searchParams.userName" clearable></el-input>
+            邮箱：<el-input size="medium" v-model="searchParams.email" clearable></el-input>
+            <el-button @click="handleSearch">查询</el-button>
+          </el-col>
+      </el-row>
     </div>
 
     <el-table :data="listData.content" border style="width: 100%" size="medium" @selection-change="handleSelectionChange">
@@ -91,7 +102,12 @@ export default {
       params: { pageNo: 1, pageSize: 10 },
       selected: [],
       showUserDetail: false,
-      showUser: {}
+      showUser: {},
+      searchParams: {
+        screenName: "",
+        userName: "",
+        email: ""
+      }
     };
   },
   created() {
@@ -191,6 +207,14 @@ export default {
           });
         })
         .catch(() => {});
+    },
+
+    handleSearch(){
+      let _self = this;
+      userService.searchUser(_self.searchParams).then(function(response) {
+        _self.listData = response.data;
+      });
+      
     }
   }
 };
@@ -225,4 +249,25 @@ export default {
 .user-list .el-dialog__body {
   padding: 10px 20px;
 }
+
+.user-list .search-group{
+  text-align: right;
+  font-size: 14px;
+  color: #5a5e66;
+}
+
+.user-list .search-group .el-input{
+  width: 150px;
+  margin-right: 10px;
+}
+
+.user-list .search-group .el-input,
+.user-list .search-group .el-button {
+  display: inline-block;
+}
+
+.user-list .search-group .el-button {
+  padding: 8px 20px;
+}
+
 </style>
