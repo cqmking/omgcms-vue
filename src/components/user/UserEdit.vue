@@ -89,7 +89,7 @@ export default {
     if (_self.$route.params.userId) {
       _self.userForm.userId = _self.$route.params.userId;
     }
-    console.log("UserID参数：" + _self.userForm.userId);
+    // console.log("UserID参数：" + _self.userForm.userId);
     if (_self.userForm.userId > 0) {
       _self.loadUser();
     }
@@ -206,7 +206,7 @@ export default {
             _self.$router.push({ name: "userList" });
           });
         } else {
-          console.log("error submit!!");
+          // console.log("error submit!!");
           return false;
         }
       });

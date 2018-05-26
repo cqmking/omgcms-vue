@@ -9,6 +9,7 @@ import UserList from '../components/user/UserList'
 import UserEdit from '../components/user/UserEdit'
 
 import RoleList from '../components/user/RoleList'
+import RoleEdit from '../components/user/RoleEdit'
 
 import Login from '../components/views/Login.vue'
 
@@ -97,6 +98,20 @@ let routes = [
                 name: 'roleList',
                 component: RoleList,
                 meta: { label: '角色管理' }
+            },
+            {
+                path: "/system/roleAdd",
+                name: 'roleAdd',
+                component: RoleEdit,
+                hidden: true,
+                meta: { label: '添加角色' }
+            },
+            {
+                path: "/system/roleEdit",
+                name: 'roleEdit',
+                component: RoleEdit,
+                hidden: true,
+                meta: { label: '修改角色' }
             }
         ]
     },

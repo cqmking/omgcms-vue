@@ -1,5 +1,5 @@
 <template>
-  <div class="sub-content user-list">
+  <div class="sub-content common-list user-list">
 
     <div class="btn-bar" style="text-align:left; margin:10px 0;">
       
@@ -246,28 +246,6 @@ export default {
   text-align: left;
 }
 
-.user-list .el-dialog__body {
-  padding: 10px 20px;
-}
 
-.user-list .search-group{
-  text-align: right;
-  font-size: 14px;
-  color: #5a5e66;
-}
-
-.user-list .search-group .el-input{
-  width: 150px;
-  margin-right: 10px;
-}
-
-.user-list .search-group .el-input,
-.user-list .search-group .el-button {
-  display: inline-block;
-}
-
-.user-list .search-group .el-button {
-  padding: 8px 20px;
-}
 
 </style>
