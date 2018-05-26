@@ -99,7 +99,7 @@ export default {
         content: [],
         totalElements: 0
       },
-      params: { pageNo: 1, pageSize: 2 },
+      params: { pageNo: 1, pageSize: 10 },
       isSearch: false,
       selected: [],
       showUserDetail: false,
