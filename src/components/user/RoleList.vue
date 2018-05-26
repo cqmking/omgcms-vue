@@ -34,7 +34,7 @@
 
       <div class="block" style="text-align:right; padding: 20px 0 10px 0;">
         <el-pagination background  @size-change="handleSizeChange" @current-change="handleCurrentPageNoChange" :current-page="params.pageNo"
-          :page-sizes="[10, 20, 30, 40, 50]" :page-size="params.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="listData.totalElements">
+          :page-sizes="[2, 10, 20, 30, 40, 50]" :page-size="params.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="listData.totalElements">
         </el-pagination>
       </div>
 
@@ -51,7 +51,8 @@ export default {
         content: [],
         totalElements: 0
       },
-      params: { pageNo: 1, pageSize: 10 },
+      params: { pageNo: 1, pageSize: 2 },
+      isSearch: false,
       selected: [],
       searchParams: {
         name: "",
@@ -66,9 +67,20 @@ export default {
   methods: {
     loadRoleList(params) {
       let _self = this;
-      roleService.getRoleList(params).then(function(response) {
-        _self.listData = response.data;
-      });
+
+      if (_self.isSearch) {
+        // 搜索
+        let realParams = Object.assign({}, params, _self.searchParams);
+        roleService.searchRole(realParams).then(function(response) {
+          _self.listData = response.data;
+        });
+
+      } else {
+        // 全部
+        roleService.getRoleList(params).then(function(response) {
+          _self.listData = response.data;
+        });
+      }
     },
     handleSelectionChange(val) {
       let _self = this;
@@ -130,10 +142,12 @@ export default {
     },
     handleSearch() {
       let _self = this;
-      roleService.searchUser(_self.searchParams).then(function(response) {
-        _self.listData = response.data;
-      });
+      // 每次搜索重置页码为1
+      _self.params.pageNo = 1;
+      _self.isSearch = true;
+      _self.loadRoleList(_self.params);
     },
+
     handleSizeChange(val) {
       let _self = this;
       _self.params.pageSize = val;

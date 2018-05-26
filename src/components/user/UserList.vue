@@ -40,7 +40,7 @@
 
     <div class="block" style="text-align:right; padding: 20px 0 10px 0;">
       <el-pagination background  @size-change="handleSizeChange" @current-change="handleCurrentPageNoChange" :current-page="params.pageNo"
-        :page-sizes="[10, 20, 30, 40, 50]" :page-size="params.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="listData.totalElements">
+        :page-sizes="[2, 10, 20, 30, 40, 50]" :page-size="params.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="listData.totalElements">
       </el-pagination>
     </div>
 
@@ -99,7 +99,8 @@ export default {
         content: [],
         totalElements: 0
       },
-      params: { pageNo: 1, pageSize: 10 },
+      params: { pageNo: 1, pageSize: 2 },
+      isSearch: false,
       selected: [],
       showUserDetail: false,
       showUser: {},
@@ -123,9 +124,19 @@ export default {
     },
     loadUserList(params) {
       let _self = this;
-      userService.getUserList(params).then(function(response) {
-        _self.listData = response.data;
-      });
+
+      if (_self.isSearch) {
+        // 搜索
+        let realParams = Object.assign({}, params, _self.searchParams);
+        userService.searchUser(realParams).then(function(response) {
+          _self.listData = response.data;
+        });
+      } else {
+        // 所有
+        userService.getUserList(params).then(function(response) {
+          _self.listData = response.data;
+        });
+      }
     },
     handleSizeChange(val) {
       let _self = this;
@@ -209,12 +220,12 @@ export default {
         .catch(() => {});
     },
 
-    handleSearch(){
+    handleSearch() {
       let _self = this;
-      userService.searchUser(_self.searchParams).then(function(response) {
-        _self.listData = response.data;
-      });
-      
+      // 每次搜索重置页码为1
+      _self.params.pageNo = 1;
+      _self.isSearch = true;
+      _self.loadUserList(_self.params);
     }
   }
 };
@@ -245,7 +256,4 @@ export default {
 .custom-table .el-row .el-col:nth-child(even) {
   text-align: left;
 }
-
-
-
 </style>
