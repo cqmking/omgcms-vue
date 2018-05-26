@@ -5,7 +5,12 @@ export const roleService = {
     getRoleList: (params) => httpRequest({ url: '/omgcms/api/roles', method: 'get', params }),
 
     getRoleById: (params) => httpRequest({ url: '/omgcms/api/role', method: 'get', params }),
-   
+
     saveRole: (data) => httpRequest({ url: '/omgcms/api/role', method: 'post', data }),
-    
+
+    deleteRoleById: (params) => httpRequest({ url: '/omgcms/api/role', method: 'delete', params }),
+
+    deleteRoleByIds: (params) => httpRequest({ url: '/omgcms/api/roles', method: 'delete', params }),
+
+    searchUser: (params) => httpRequest({ url: '/omgcms/api/role/search', method: 'get', params }),
 }

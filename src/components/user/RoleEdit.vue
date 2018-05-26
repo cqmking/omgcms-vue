@@ -3,28 +3,28 @@
         <el-form class="role-form" ref="roleForm" :rules="rules" :model="roleForm" size="medium" label-width="80px" style="text-align:left; margin-top: 20px;">
             <el-row :gutter="20">
                 <el-col :span="24">
-                    <el-form-item label="角色名称" prop="name">
+                    <el-form-item label="角色名称" prop="name" label-width="120px">
                         <el-input v-model="roleForm.name" style="max-width:300px;"></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
             <el-row :gutter="20">
                 <el-col :span="24">
-                    <el-form-item label="角色编码" prop="roleKey">
+                    <el-form-item label="角色编码" prop="roleKey" label-width="120px">
                         <el-input v-model="roleForm.roleKey" style="max-width:300px;"></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
             <el-row :gutter="20">
                 <el-col :span="24">
-                    <el-form-item label="描述" prop="description">
-                    <el-input type="textarea" v-model="roleForm.description" class="description-txt-area"></el-input>
+                    <el-form-item label="描述" prop="description" label-width="120px">
+                    <el-input type="textarea" v-model="roleForm.description" style="max-width:750px;" class="description-txt-area"></el-input>
                     </el-form-item>
                 </el-col>
             </el-row>
 
             <el-form-item>
-                <el-button type="primary" @click="saveHandler">保存</el-button>
+                <el-button type="primary" @click="saveHandler('roleForm')">保存</el-button>
                 <el-button @click="backHandler">返回</el-button>
             </el-form-item>
             
@@ -40,7 +40,8 @@ export default {
       roleForm: {
         roleId: 0,
         name: "",
-        roleKey: ""
+        roleKey: "",
+        description: ""
       },
       rules: {
         name: [
@@ -82,13 +83,13 @@ export default {
         _self.roleForm = response.data;
       });
     },
-    saveHandler() {
+    saveHandler(roleForm) {
       let _self = this;
-
+      
       _self.$refs[roleForm].validate(valid => {
         if (valid) {
           // 提交保存
-          roleService.saveUser(_self.roleForm).then(function(response) {
+          roleService.saveRole(_self.roleForm).then(function(response) {
             _self.$message({
               message: "角色信息保存成功！",
               type: "success"
