@@ -40,7 +40,7 @@
 
     <div class="block" style="text-align:right; padding: 20px 0 10px 0;">
       <el-pagination background  @size-change="handleSizeChange" @current-change="handleCurrentPageNoChange" :current-page="params.pageNo"
-        :page-sizes="[2, 10, 20, 30, 40, 50]" :page-size="params.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="listData.totalElements">
+        :page-sizes="[5, 10, 20, 30, 40, 50]" :page-size="params.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="listData.totalElements">
       </el-pagination>
     </div>
 
