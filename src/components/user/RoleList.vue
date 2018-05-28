@@ -24,9 +24,11 @@
       <el-table-column prop="roleKey" label="角色编码" width="260" align="left"></el-table-column>
       <el-table-column prop="description" label="描述" min-width="260" align="left" show-overflow-tooltip></el-table-column>
       <el-table-column prop="createDate" label="创建时间" min-width="200" align="center" :formatter="$common.formatDate"></el-table-column>
-      <el-table-column fixed="right" label="操作" width="200" align="center">
+      <el-table-column fixed="right" label="操作" width="260" align="center">
         <template slot-scope="scope">
               <el-button type="text" size="small" @click="handUpdateRole(scope.row)">编辑</el-button>
+              <el-button type="text" size="small" @click="">分配用户</el-button>
+              <el-button type="text" size="small" @click="">定义权限</el-button>
               <el-button type="text" style="color:#f56c6c;" size="small" @click="handleDeleteRole(scope.row)">删除</el-button>
         </template>
         </el-table-column>
