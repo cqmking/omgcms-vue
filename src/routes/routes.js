@@ -10,6 +10,7 @@ import UserEdit from '../components/user/UserEdit'
 
 import RoleList from '../components/user/RoleList'
 import RoleEdit from '../components/user/RoleEdit'
+import RolePermDefine from '../components/user/RolePermDefine'
 
 import Login from '../components/views/Login.vue'
 
@@ -112,6 +113,13 @@ let routes = [
                 component: RoleEdit,
                 hidden: true,
                 meta: { label: '修改角色' }
+            },
+            {
+                path: "/system/rolePermDefine",
+                name: 'rolePermDefine',
+                component: RolePermDefine,
+                hidden: true,
+                meta: { label: '权限定义' }
             }
         ]
     },

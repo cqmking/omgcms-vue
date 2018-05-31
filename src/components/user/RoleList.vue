@@ -6,7 +6,7 @@
       <el-row :gutter="20">
           <el-col :span="8" style="min-width: 320px;">
             <el-button type="primary" icon="el-icon-circle-plus-outline" size="medium" @click="handleCreateRole">新增</el-button>
-            <el-button v-show="selected.length == 1" type="warning" icon="el-icon-edit" size="medium" @click="handUpdateRole(selected[0])">修改</el-button>
+            <el-button v-show="selected.length == 1" type="warning" icon="el-icon-edit" size="medium" @click="handleUpdateRole(selected[0])">修改</el-button>
             <el-button v-show="selected.length > 0" type="danger" icon="el-icon-delete" size="medium" @click="handleBatchDeleteRole(selected)">删除</el-button>
           </el-col>
           <el-col :span="16" style="text-align:right;" class="search-group">
@@ -26,9 +26,9 @@
       <el-table-column prop="createDate" label="创建时间" min-width="200" align="center" :formatter="$common.formatDate"></el-table-column>
       <el-table-column fixed="right" label="操作" width="260" align="center">
         <template slot-scope="scope">
-              <el-button type="text" size="small" @click="handUpdateRole(scope.row)">编辑</el-button>
+              <el-button type="text" size="small" @click="handleUpdateRole(scope.row)">编辑</el-button>
               <el-button type="text" size="small" @click="">分配用户</el-button>
-              <el-button type="text" size="small" @click="">定义权限</el-button>
+              <el-button type="text" size="small" @click="handleDefinePermission(scope.row)">定义权限</el-button>
               <el-button type="text" style="color:#f56c6c;" size="small" @click="handleDeleteRole(scope.row)">删除</el-button>
         </template>
         </el-table-column>
@@ -88,9 +88,14 @@ export default {
       let _self = this;
       _self.selected = val;
     },
-    handUpdateRole(role) {
+    handleUpdateRole(role) {
       let _self = this;
       _self.$router.push({ name: "roleEdit", params: { roleId: role.roleId } });
+    },
+    handleDefinePermission(role){
+      //定义权限
+      let _self = this;
+      _self.$router.push({ name: "rolePermDefine", params: { roleId: role.roleId } });
     },
     handleCreateRole() {
       let _self = this;
