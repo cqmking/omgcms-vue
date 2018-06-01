@@ -27,7 +27,7 @@
       <el-table-column fixed="right" label="操作" width="260" align="center">
         <template slot-scope="scope">
               <el-button type="text" size="small" @click="handleUpdateRole(scope.row)">编辑</el-button>
-              <el-button type="text" size="small" @click="">分配用户</el-button>
+              <el-button type="text" size="small" @click="handleUserAssign(scope.row)">分配用户</el-button>
               <el-button type="text" size="small" @click="handleDefinePermission(scope.row)">定义权限</el-button>
               <el-button type="text" style="color:#f56c6c;" size="small" @click="handleDeleteRole(scope.row)">删除</el-button>
         </template>
@@ -96,6 +96,11 @@ export default {
       //定义权限
       let _self = this;
       _self.$router.push({ name: "rolePermDefine", params: { roleId: role.roleId } });
+    },
+    handleUserAssign(role){
+      //定义权限
+      let _self = this;
+      _self.$router.push({ name: "roleUserAssign", params: { roleId: role.roleId } });
     },
     handleCreateRole() {
       let _self = this;

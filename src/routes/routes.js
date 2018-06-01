@@ -11,6 +11,8 @@ import UserEdit from '../components/user/UserEdit'
 import RoleList from '../components/user/RoleList'
 import RoleEdit from '../components/user/RoleEdit'
 import RolePermDefine from '../components/user/RolePermDefine'
+import RoleUserAssign from '../components/user/RoleUserAssign'
+
 
 import Login from '../components/views/Login.vue'
 
@@ -120,6 +122,13 @@ let routes = [
                 component: RolePermDefine,
                 hidden: true,
                 meta: { label: '权限定义' }
+            },
+            {
+                path: "/system/roleUserAssign",
+                name: 'roleUserAssign',
+                component: RoleUserAssign,
+                hidden: true,
+                meta: { label: '分配用户' }
             }
         ]
     },
