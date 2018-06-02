@@ -22,6 +22,7 @@ axios.defaults.baseURL = "http://127.0.0.1:8080"
 // http请求拦截器
 var loadinginstace
 axios.interceptors.request.use(config => {
+    console.log("lanjie"+config);
     // element ui Loading方法
     loadinginstace = Loading.service({ fullscreen: true })
     if (config.method == "post") {

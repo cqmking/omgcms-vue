@@ -16,5 +16,12 @@ export const userService = {
     deleteUserByIds: (params) => httpRequest({ url: '/omgcms/api/users', method: 'delete', params }),
 
     searchUser: (params) => httpRequest({ url: '/omgcms/api/user/search', method: 'get', params }),
+
+    getUnassignedUsersByRoleId: (params) => httpRequest({ url: '/omgcms/api/user/get-unassigned-users', method: 'get', params }),
+    
+    getAssignedUsersByRoleId: (params) => httpRequest({ url: '/omgcms/api/user/get-assigned-users', method: 'get', params }),
+
+    assignUsersToRole: (data) => httpRequest({ url: '/omgcms/api/user/assign-users-to-role', method: 'post', data}),
+    
     
 }

@@ -13,4 +13,6 @@ export const roleService = {
     deleteRoleByIds: (params) => httpRequest({ url: '/omgcms/api/roles', method: 'delete', params }),
 
     searchRole: (params) => httpRequest({ url: '/omgcms/api/role/search', method: 'get', params }),
+
+    
 }
