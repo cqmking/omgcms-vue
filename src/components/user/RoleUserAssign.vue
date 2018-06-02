@@ -14,7 +14,7 @@
             <el-table-column fixed="right" label="操作" width="150" align="center" >
               <template slot-scope="scope">
                 <el-button title="从当前角色移除该用户" type="text" size="small" style="color:#f56c6c;" 
-                  @click="handleRemoveUserFromRole(scope.row)">移除</el-button>
+                  @click="handleRemoveUserFromRole([scope.row])">移除</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -22,7 +22,8 @@
           <div class="block" style="text-align:right; padding: 20px 0 10px 0;">
             <el-row :gutter="20">
               <el-col :span="4" style="text-align:left;">
-                <el-button type="danger" icon="el-icon-circle-plus-outline" size="medium" @click="handleRemoveUserFromRole">移除</el-button>
+                <el-button type="danger" v-show="selected.length > 0" icon="el-icon-remove-outline" size="medium" @click="handleRemoveUserFromRole(selected)">移除</el-button>
+                &ensp;
               </el-col> 
               <el-col :span="20">
                 <el-pagination background  @size-change="handleSizeChange" @current-change="handleCurrentPageChange" :current-page="params.pageNo"
@@ -54,6 +55,7 @@
             <el-row :gutter="20">
               <el-col :span="4" style="text-align:left;">
                 <el-button type="primary" v-show="selected.length > 0" icon="el-icon-circle-plus-outline" size="medium" @click="handleAssignUserToRole(selected)">分配</el-button>
+                &ensp;
               </el-col> 
               <el-col :span="20">
                 <el-pagination background  @size-change="handleSizeChange" @current-change="handleCurrentPageChange" :current-page="params.pageNo"
@@ -71,6 +73,7 @@
 
 <script>
 import { userService } from "~/service/userService.js";
+import { roleService } from "~/service/roleService.js";
 
 export default {
   data() {
@@ -152,6 +155,7 @@ export default {
 
       let realData = { roleId: _self.roleId, userIds: userIdArray };
       userService.assignUsersToRole(realData).then(function(response) {
+        _self.loadUnassignUsers();
         _self.$message({
           type: "success",
           message: "分配成功!"
@@ -161,12 +165,23 @@ export default {
     /**
      * 从当前角色移除用户
      */
-    handleRemoveUserFromRole(user) {
+    handleRemoveUserFromRole(userList) {
       let _self = this;
-      if (user) {
-      } else {
-        _self.selected;
-      }
+      let userIdArray = [];
+
+      userList.forEach(function(user) {
+        userIdArray.push(user.userId);
+      });
+
+      let realData = { roleId: _self.roleId, userIds: userIdArray };
+      roleService.removeUsersFromRole(realData).then(function(response) {
+        _self.loadAssignedUsers();
+        _self.$message({
+          type: "success",
+          message: "移除成功!"
+        });
+      });
+
     },
 
     handleSelectionChange(val) {

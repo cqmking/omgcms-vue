@@ -21,7 +21,7 @@ export const userService = {
     
     getAssignedUsersByRoleId: (params) => httpRequest({ url: '/omgcms/api/user/get-assigned-users', method: 'get', params }),
 
-    assignUsersToRole: (data) => httpRequest({ url: '/omgcms/api/user/assign-users-to-role', method: 'post', data}),
+    assignUsersToRole: (params) => httpRequest({ url: '/omgcms/api/user/assign-users-to-role', method: 'post', params}),
     
     
 }

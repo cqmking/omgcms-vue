@@ -14,5 +14,6 @@ export const roleService = {
 
     searchRole: (params) => httpRequest({ url: '/omgcms/api/role/search', method: 'get', params }),
 
+    removeUsersFromRole: (params) => httpRequest({ url: '/omgcms/api/role/remove-users', method: 'delete', params }),
     
 }
