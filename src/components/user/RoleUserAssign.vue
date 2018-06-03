@@ -155,6 +155,7 @@ export default {
 
       let realData = { roleId: _self.roleId, userIds: userIdArray };
       userService.assignUsersToRole(realData).then(function(response) {
+        _self.params.pageNo = 1;
         _self.loadUnassignUsers();
         _self.$message({
           type: "success",
@@ -175,6 +176,7 @@ export default {
 
       let realData = { roleId: _self.roleId, userIds: userIdArray };
       roleService.removeUsersFromRole(realData).then(function(response) {
+        _self.params.pageNo = 1;
         _self.loadAssignedUsers();
         _self.$message({
           type: "success",

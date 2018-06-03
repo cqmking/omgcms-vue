@@ -1,5 +1,7 @@
 <template>
-    <h1>定义权限</h1>
+    <div class="sub-content common-list define-permission">
+      <h1>定义权限</h1>
+    </div>
 </template>
 
 <script>
