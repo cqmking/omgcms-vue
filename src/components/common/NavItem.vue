@@ -1,6 +1,6 @@
 <template>
     <!-- 如果当前item中有子节点 -->
-    <el-submenu v-if="item.children && item.children.length && item.hidden!=true" :index="navIndex"> 
+    <el-submenu v-if="item.children && item.children.length && item.hidden!=true && item.isLastItem!=true" :index="navIndex"> 
         <!-- 创建菜单分组 -->
         <template slot="title">
             <i :class="'fa ' + item.iconClass" aria-hidden="true"></i>

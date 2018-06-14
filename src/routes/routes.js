@@ -1,4 +1,5 @@
 import Layout from '../components/Layout.vue'
+import Abstract from '../components/common/Abstract'
 
 import SysInfo from '../components/workspace/SysInfo'
 import Dashboard from '../components/workspace/Dashboard'
@@ -12,7 +13,6 @@ import RoleList from '../components/user/RoleList'
 import RoleEdit from '../components/user/RoleEdit'
 import RolePermDefine from '../components/user/RolePermDefine'
 import RoleUserAssign from '../components/user/RoleUserAssign'
-
 
 import Login from '../components/views/Login.vue'
 
@@ -77,59 +77,82 @@ let routes = [
         meta: { label: '用户管理' },
         children: [
             {
-                path: "/system/userList",
-                name: 'userList',
-                component: UserList,
-                meta: { label: '成员管理' }
+                path: "/system/userManage",
+                name: 'userManage',
+                component: Abstract,
+                redirect: { name: 'userList' },
+                meta: { label: '成员管理' },
+                isLastItem: true,
+                children: [
+                    {
+                        path: "/system/userManage/userList",
+                        name: 'userList',
+                        component: UserList,
+                        hidden: true,
+                        meta: { label: '用户列表' }
+                    },
+                    {
+                        path: "/system/userManage/userAdd",
+                        name: 'userAdd',
+                        component: UserEdit,
+                        hidden: true,
+                        meta: { label: '添加用户' }
+                    },
+                    {
+                        path: "/system/userManage/userEdit",
+                        name: 'userEdit',
+                        component: UserEdit,
+                        hidden: true,
+                        meta: { label: '修改用户' }
+                    }
+                ]
             },
             {
-                path: "/system/userAdd",
-                name: 'userAdd',
-                component: UserEdit,
-                hidden: true,
-                meta: { label: '添加用户' }
-            },
-            {
-                path: "/system/userEdit",
-                name: 'userEdit',
-                component: UserEdit,
-                hidden: true,
-                meta: { label: '修改用户' }
-            },
-            {
-                path: "/system/roleList",
-                name: 'roleList',
-                component: RoleList,
-                meta: { label: '角色管理' }
-            },
-            {
-                path: "/system/roleAdd",
-                name: 'roleAdd',
-                component: RoleEdit,
-                hidden: true,
-                meta: { label: '添加角色' }
-            },
-            {
-                path: "/system/roleEdit",
-                name: 'roleEdit',
-                component: RoleEdit,
-                hidden: true,
-                meta: { label: '修改角色' }
-            },
-            {
-                path: "/system/rolePermDefine",
-                name: 'rolePermDefine',
-                component: RolePermDefine,
-                hidden: true,
-                meta: { label: '权限定义' }
-            },
-            {
-                path: "/system/roleUserAssign",
-                name: 'roleUserAssign',
-                component: RoleUserAssign,
-                hidden: true,
-                meta: { label: '分配用户' }
+                path: "/system/roleManage",
+                name: 'roleManage',
+                component: Abstract,
+                redirect: { name: 'roleList' },
+                meta: { label: '角色管理' },
+                isLastItem: true,
+                children: [
+                    {
+                        path: "/system/roleManage/roleList",
+                        name: 'roleList',
+                        component: RoleList,
+                        hidden: true,
+                        meta: { label: '角色列表' }
+                    },
+                    {
+                        path: "/system/roleManage/roleAdd",
+                        name: 'roleAdd',
+                        component: RoleEdit,
+                        hidden: true,
+                        meta: { label: '添加角色' }
+                    },
+                    {
+                        path: "/system/roleManage/roleEdit",
+                        name: 'roleEdit',
+                        component: RoleEdit,
+                        hidden: true,
+                        meta: { label: '修改角色' }
+                    },
+                    {
+                        path: "/system/roleManage/rolePermDefine",
+                        name: 'rolePermDefine',
+                        component: RolePermDefine,
+                        hidden: true,
+                        meta: { label: '权限定义' }
+                    },
+                    {
+                        path: "/system/roleUserAssign",
+                        name: 'roleUserAssign',
+                        component: RoleUserAssign,
+                        hidden: true,
+                        meta: { label: '分配用户' }
+                    }
+                ]
             }
+
         ]
     },
     {
